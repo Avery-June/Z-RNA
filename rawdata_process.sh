@@ -57,7 +57,6 @@ STAR --runThreadN 20 \
 --outFileNamePrefix ${rootpath}/star/${id%_*}_
 done
 
-
 # remove reads aligned to the plasmid
 cd ${rootpath}/star
 mkdir removeP
@@ -71,3 +70,7 @@ cd ${rootpath}/star/removeP
 mkdir sortbam
 ls *Aligned.sortedByCoord.out.bam|while read id;do samtools sort -n ${id} -o sortbam/${id};done
 cd sortbam;ls *bam|while read id;do bedtools bamtofastq -i ${id} -fq ${rootpath}/rmplasmid/${id%_*}_1.fastq -fq2 ${rootpath}/rmplasmid/${id%_*}_2.fastq;done
+
+# infer_strand
+cd ${rootpath}/star
+ls *Aligned.sortedByCoord.out.bam|while read id;do infer_experiment.py -r hg38_RefSeq.bed -s 2000000 -i ${id};echo ${id};done
