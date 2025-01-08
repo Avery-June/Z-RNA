@@ -73,4 +73,4 @@ cd sortbam;ls *bam|while read id;do bedtools bamtofastq -i ${id} -fq ${rootpath}
 
 # infer_strand
 cd ${rootpath}/star
-ls *Aligned.sortedByCoord.out.bam|while read id;do infer_experiment.py -r hg38_RefSeq.bed -s 2000000 -i ${id};echo ${id};done
+ls *Aligned.sortedByCoord.out.bam|while read id;do samtools index ${id};infer_experiment.py -r hg38_RefSeq.bed -s 2000000 -i ${id};echo ${id};done
