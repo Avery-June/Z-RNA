@@ -59,7 +59,7 @@ RNAfold <specific_trans_clu.fa --noPS >exp.db; less exp.db|cut -f1 -d" "|awk 'BE
 #with SHAPE-seq
 #The shape file was split into each gene, and the corresponding sequence was extracted according to the coordinates of the cluster
 
-less GSM4333256_293.out.txt |awk 'BEGIN{OFS="\t"} {name=$1;l=$2+3;} {for (i=4;i<=l;i++) {print(i-3,$i,name)}}' >all.txt
+less shape.out.txt |awk 'BEGIN{OFS="\t"} {name=$1;l=$2+3;} {for (i=4;i<=l;i++) {print(i-3,$i,name)}}' >all.txt
 sed -i 's/NULL/-999/g' all.txt
 less all.txt |cut -f3|sort -u >shape_genelist.txt 
 awk 'BEGIN{OFS="\t"} NR==FNR{a[$1];next} {if ($1 in a) print}' shape_genelist.txt specific_trans_clu.bed | awk 'BEGIN{OFS="\t"} {n=$1;a=$2;b=$3;} {cmd="less all.txt|grep "n"|head -n "b" |tail -n "b-a"|cut -f2|nl - >"n".txt"; system(cmd);}'
@@ -93,7 +93,7 @@ awk 'BEGIN{OFS="\t"} NR==FNR{a[$1];next} {if($4 in a) print}' shape_genelist.txt
 
 
 less back_shape.bed|cut -f4 >back_shape_transid.txt
-less GSM4333256_293.out.txt |grep -f back_shape_transid.txt > back_shape.txt
+less shape.out.txt |grep -f back_shape_transid.txt > back_shape.txt
 less back_shape.txt |awk 'BEGIN{OFS="\t"} {name=$1;l=$2+3;} {for (i=4;i<=l;i++) {print(i-3,$i,name)}}'|sed 's/NULL/-999/g' >back_all.txt
 less back_shape.bed |awk 'BEGIN{OFS="\t"} {print$4,$1,$2+1"\n"$4,$1,$3}'|GenoTransPosShuttle.pl -o geno2trans -g gencode.v42.primary_assembly.annotation.gpe -i -|bedtools groupby -g 1 -c 4,4 -o min,max|awk 'BEGIN{OFS="\t"} {print$1,$2-1,$3}'|sortBed >back_shape_transcoord.bed
 
