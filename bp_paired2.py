@@ -44,7 +44,7 @@ def main():
                 #stop i at the second to last, make sure it's connected, and limit the cases where 1 and 0 are considered pairs
                 count += 1
             else:
-                if count ==bp:
+                if count >=bp:
                     paired_bp+=count
                     stem_length.append(count)
                 count=1
