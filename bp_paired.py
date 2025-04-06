@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 '''
-staatistic paired length
+Predicted stem length statistics from secondary structure analysis
+Extract fragments where the predicted stem length is 6 to 10 nt and output them individually
 '''
 
 import argparse
