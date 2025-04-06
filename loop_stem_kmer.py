@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+'''
+Performs k-mer enrichment analysis by comparing two FASTA datasets (a / b)
+'''
 
 import argparse
 from collections import Counter
