@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+'''
+Extracts stem regions and loop regions from RNA secondary structure predictions
+'''
+
 import argparse
 import os
 
