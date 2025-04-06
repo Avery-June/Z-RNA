@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 '''
-staatistic paired length
+Statistics on paired stem lengths
+user can set the minimum stem length threshold
 '''
 
 import argparse
